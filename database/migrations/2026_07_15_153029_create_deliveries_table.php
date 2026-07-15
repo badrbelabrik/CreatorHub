@@ -9,13 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('deliveries', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+public function up(): void
+{
+    Schema::create('deliveries', function (Blueprint $table) {
+        $table->id();
+
+        $table->foreignId('task_id')
+              ->constrained()
+              ->cascadeOnDelete();
+
+        $table->string('link');
+
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
