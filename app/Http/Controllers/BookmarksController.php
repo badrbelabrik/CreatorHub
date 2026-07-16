@@ -34,33 +34,33 @@ class BookmarksController extends Controller
 
     /**
      * Display the specified resource.
-     */
-    public function show(bookmarks $bookmarks)
-    {
-        //
-    }
+    //  */
+    // public function show(bookmarks $bookmarks)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(bookmarks $bookmarks)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(bookmarks $bookmarks)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatebookmarksRequest $request, bookmarks $bookmarks)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update(UpdatebookmarksRequest $request, bookmarks $bookmarks)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(bookmarks $bookmarks)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(bookmarks $bookmarks)
+    // {
+    //     //
+    // }
 }

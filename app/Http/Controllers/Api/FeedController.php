@@ -17,6 +17,6 @@ class FeedController extends Controller
             'success' => true,
             'message' => 'Feed récupéré avec succès',
             'projects' => $projects,
-        ], 200);
+        ]);
     }
 }

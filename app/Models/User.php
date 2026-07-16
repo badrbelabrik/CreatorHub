@@ -7,19 +7,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $fillable = ['name', 'email', 'password', 'role'];
-    public function profile()
+
+
+    public function profile():HasOne
     {
         return $this->hasOne(Profile::class);
     }
-    public function portfolioProjects()
-{
-    return $this->hasMany(PortfolioProject::class);
-}
 
-public function bookmarks()
-{
-    return $this->hasMany(Bookmark::class);
-}
+
+
+
+
+//     public function portfolioProjects()
+// {
+//     return $this->hasMany(PortfolioProject::class);
+// }
+
+// public function bookmarks()
+// {
+//     return $this->hasMany(Bookmark::class);
+// }
 
 
 // public function like()
