@@ -15,8 +15,11 @@
 
 @foreach($workspaces as $workspace)
 
-    <h3>{{ $workspace->title }}</h3>
-
+<h3>
+    <a href="{{ route('workspaces.show', $workspace->id) }}">
+        {{ $workspace->title }}
+    </a>
+</h3>
     <p>{{ $workspace->description }}</p>
 
     <hr>
