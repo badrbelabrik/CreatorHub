@@ -1,27 +1,19 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('portfolio_project_tags', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('portfolio_project_tag', function (Blueprint $table) {
+            $table->foreignId('portfolio_project_id');
+            $table->foreignId('tag_id');
+            $table->primary(['portfolio_project_id', 'tag_id']);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('portfolio_project_tags');
+        Schema::dropIfExists('portfolio_project_tag');
     }
 };
