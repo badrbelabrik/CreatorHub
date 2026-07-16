@@ -1,12 +1,26 @@
 <?php
-
 namespace App\Models;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class User extends Authenticatable
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class users extends Model
 {
-    /** @use HasFactory<\Database\Factories\UsersFactory> */
-    use HasFactory;
+    protected $fillable = ['name', 'email', 'password', 'role'];
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profiles::class);
+    }
+    public function portfolioProjects(): HasMany
+    {
+        return $this->hasMany(Portfolio_Projects::class);
+    }
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Likes::class);
+    }
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmarks::class);
+    }
 }
