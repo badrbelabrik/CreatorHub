@@ -14,7 +14,6 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -28,5 +27,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Les workspaces créés par l'utilisateur.
+     */
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class, 'owner_id');
+    }
+
+    /**
+     * Les tâches assignées à l'utilisateur.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
     }
 }
