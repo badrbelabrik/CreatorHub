@@ -38,4 +38,7 @@ class WorkspaceController extends Controller
         return redirect()->route('workspaces.index')
                          ->with('success', 'Workspace created successfully.');
     }
+    public function show(Workspace $workspace){
+               return view('workspaces.show' , compact('workspace'));
+    }
 }
