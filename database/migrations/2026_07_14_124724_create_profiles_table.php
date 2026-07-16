@@ -10,8 +10,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->unique();
-
-
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();
             $table->decimal('hourly_rate', 10, 2)->nullable();

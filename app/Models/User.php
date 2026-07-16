@@ -2,6 +2,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+// use App\Models\Bookmarks;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
@@ -17,14 +18,14 @@ class User extends Authenticatable
 
 public function bookmarks()
 {
-    return $this->hasMany(Bookmarks::class);
+    return $this->hasMany(Bookmark::class);
 }
 
 
-public function likes()
-{
-    return $this->hasMany(likes::class);
-}
+// public function like()
+// {
+//     return $this->hasMany(Like::class);
+// }
 
 
 
