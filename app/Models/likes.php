@@ -9,4 +9,7 @@ class likes extends Model
 {
     /** @use HasFactory<\Database\Factories\LikesFactory> */
     use HasFactory;
+    public  function  user(){
+        return  $this->hasMany(user::class);
+    }
 }

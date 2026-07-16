@@ -9,4 +9,6 @@ class project_media extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectMediaFactory> */
     use HasFactory;
+
+    
 }

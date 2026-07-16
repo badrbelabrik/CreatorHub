@@ -1,12 +1,13 @@
 <?php
-
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class tags extends Model
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+class Tag extends Model
 {
-    /** @use HasFactory<\Database\Factories\TagsFactory> */
-    use HasFactory;
+    protected $fillable = ['name'];
+
+    public function portfolioProjects()
+    {
+        return $this->belongsToMany(PortfolioProject::class);
+    }
 }
