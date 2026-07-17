@@ -1,40 +1,30 @@
 <?php
+
 namespace App\Models;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-// use App\Models\Bookmarks;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 class User extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    use HasApiTokens, HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+    ];
 
-    public function profile():HasOne
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
     }
-
-
-
-
-
-//     public function portfolioProjects()
-// {
-//     return $this->hasMany(PortfolioProject::class);
-// }
-
-// public function bookmarks()
-// {
-//     return $this->hasMany(Bookmark::class);
-// }
-
-
-// public function like()
-// {
-//     return $this->hasMany(Like::class);
-// }
-
-
-
-
 }

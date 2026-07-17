@@ -10,4 +10,6 @@ class Tag extends Model
     {
         return $this->belongsToMany(PortfolioProject::class);
     }
+    
 }
+

@@ -8,6 +8,7 @@ use App\Models\PortfolioProject;
 class FeedController extends Controller
 {
     public function index()
+    // user/profil/PortfolioProject
     {
         $projects = PortfolioProject::with('user.profile')
             ->latest()
@@ -19,4 +20,6 @@ class FeedController extends Controller
             'projects' => $projects,
         ]);
     }
+
+    
 }
