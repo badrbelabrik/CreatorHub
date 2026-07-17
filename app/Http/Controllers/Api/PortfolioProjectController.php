@@ -33,7 +33,7 @@ class PortfolioProjectController extends Controller
 
 
 //         // 3. Ajout des tags dans la table pivot
-//         $project->tags()->sync($validated['tags']);
+        $project->tags()->sync($validated['tags']);
 
 
 
