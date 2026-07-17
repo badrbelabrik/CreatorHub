@@ -13,7 +13,11 @@ class JobOfferController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = JobOffer::with('user')
+            ->latest()
+            ->get();
+
+        return response()->json($jobs);
     }
 
     /**
@@ -43,24 +47,45 @@ class JobOfferController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(JobOffer $job)
     {
-        //
+        return response()->json(
+            $job->load('user')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, JobOffer $job)
     {
-        //
+        $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|required|string|min:10',
+            'budget' => 'sometimes|required|numeric|min:0',
+        ]);
+
+        $job->update($request->only([
+            'title',
+            'description',
+            'budget'
+        ]));
+
+        return response()->json([
+            'message' => 'Job updated successfully.',
+            'data' => $job
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(JobOffer $job)
     {
-        //
+        $job->delete();
+
+        return response()->json([
+            'message' => 'Job deleted successfully.'
+        ]);
     }
 }
