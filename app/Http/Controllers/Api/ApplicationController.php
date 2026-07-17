@@ -5,34 +5,49 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\JobOffer;
-use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all applications for a job offer.
      */
     public function index(JobOffer $job)
     {
+        if ($job->user_id !== auth()->id()) {
+            return response()->json([
+                'message' => 'Unauthorized.'
+            ], 403);
+        }
+
         $applications = $job->applications()
             ->with('user')
+            ->latest()
             ->get();
 
-        return response()->json($applications);
+        return response()->json([
+            'message' => 'Applications retrieved successfully.',
+            'data' => $applications
+        ], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Apply to a job offer.
      */
     public function store(JobOffer $job)
     {
+        if ($job->user_id === auth()->id()) {
+            return response()->json([
+                'message' => 'You cannot apply to your own job offer.'
+            ], 403);
+        }
+
         $exists = Application::where('user_id', auth()->id())
             ->where('job_offer_id', $job->id)
             ->exists();
 
         if ($exists) {
             return response()->json([
-                'message' => 'You have already applied.'
+                'message' => 'You have already applied to this job.'
             ], 409);
         }
 
@@ -46,29 +61,5 @@ class ApplicationController extends Controller
             'message' => 'Application submitted successfully.',
             'data' => $application
         ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

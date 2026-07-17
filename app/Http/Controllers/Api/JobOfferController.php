@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class JobOfferController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all job offers.
      */
     public function index()
     {
@@ -17,75 +17,84 @@ class JobOfferController extends Controller
             ->latest()
             ->get();
 
-        return response()->json($jobs);
+        return response()->json([
+            'message' => 'Job offers retrieved successfully.',
+            'data' => $jobs
+        ], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created job offer.
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|min:10',
             'budget' => 'required|numeric|min:0',
         ]);
 
-        $jobOffer = JobOffer::create([
-            'user_id' => auth()->id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'budget' => $request->budget,
-        ]);
+        $validated['user_id'] = auth()->id();
+
+        $jobOffer = JobOffer::create($validated);
 
         return response()->json([
-            'message' => 'Job offer created successfully',
+            'message' => 'Job offer created successfully.',
             'data' => $jobOffer
         ], 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified job offer.
      */
     public function show(JobOffer $job)
     {
-        return response()->json(
-            $job->load('user')
-        );
+        return response()->json([
+            'message' => 'Job offer retrieved successfully.',
+            'data' => $job->load('user', 'applications')
+        ], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified job offer.
      */
     public function update(Request $request, JobOffer $job)
     {
-        $request->validate([
+        if ($job->user_id !== auth()->id()) {
+            return response()->json([
+                'message' => 'Unauthorized.'
+            ], 403);
+        }
+
+        $validated = $request->validate([
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string|min:10',
             'budget' => 'sometimes|required|numeric|min:0',
         ]);
 
-        $job->update($request->only([
-            'title',
-            'description',
-            'budget'
-        ]));
+        $job->update($validated);
 
         return response()->json([
-            'message' => 'Job updated successfully.',
+            'message' => 'Job offer updated successfully.',
             'data' => $job
-        ]);
+        ], 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified job offer.
      */
     public function destroy(JobOffer $job)
     {
+        if ($job->user_id !== auth()->id()) {
+            return response()->json([
+                'message' => 'Unauthorized.'
+            ], 403);
+        }
+
         $job->delete();
 
         return response()->json([
-            'message' => 'Job deleted successfully.'
-        ]);
+            'message' => 'Job offer deleted successfully.'
+        ], 200);
     }
 }
