@@ -29,4 +29,4 @@ class Workspace extends Model
     {
         return $this->belongsToMany(User::class, 'workspace_user');
     }
-}
+}  
