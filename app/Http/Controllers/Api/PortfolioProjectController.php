@@ -44,10 +44,10 @@ class PortfolioProjectController extends Controller
         ]);
 
 
-//         return response()->json([
-//             'success' => true,
-//             'message' => 'Projet publié avec succès',
-//             'project' => $project,
-//         ], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Projet publié avec succès',
+            'project' => $project,
+        ], 201);
  }
 }
