@@ -27,4 +27,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    /**
+     * Les workspaces créés par l'utilisateur.
+     */
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class, 'owner_id');
+    }
+
+    /**
+     * Les tâches assignées à l'utilisateur.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
 }
