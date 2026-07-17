@@ -38,10 +38,10 @@ class PortfolioProjectController extends Controller
 
 
 //         // 4. Charger les relations
-//         $project->load([
-//             'user.profile',
-//             'tags',
-//         ]);
+        $project->load([
+            'user.profile',
+            'tags',
+        ]);
 
 
 //         return response()->json([
