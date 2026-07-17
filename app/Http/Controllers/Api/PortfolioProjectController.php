@@ -22,14 +22,14 @@ class PortfolioProjectController extends Controller
 
 
 
-//         // 2. Création du projet
-//         $project = PortfolioProject::create([
-//             'user_id' => $request->user()->id,
-//             'title' => $validated['title'],
-//             'description' => $validated['description'] ?? null,
-//             'media_type' => $validated['media_type'],
-//             'media_url' => $validated['media_url'],
-//         ]);
+        // 2. Création du projet
+        $project = PortfolioProject::create([
+            'user_id' => $request->user()->id,
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'media_type' => $validated['media_type'],
+            'media_url' => $validated['media_url'],
+        ]);
 
 
 //         // 3. Ajout des tags dans la table pivot
@@ -49,5 +49,5 @@ class PortfolioProjectController extends Controller
 //             'message' => 'Projet publié avec succès',
 //             'project' => $project,
 //         ], 201);
-//     }
+ }
 }
